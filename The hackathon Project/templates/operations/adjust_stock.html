@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Deliver Stock</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+<h2>Deliver Stock</h2>
+
+<form action="/deliveries" method="POST">
+
+<label>Product ID</label>
+<input type="number" name="product_id" required>
+
+<label>Quantity Delivered</label>
+<input type="number" name="quantity" required>
+
+<button type="submit">Deliver Stock</button>
+
+</form>
+
+<a href="/dashboard" class="back-btn">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

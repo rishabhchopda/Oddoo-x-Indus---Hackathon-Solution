@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>CoreInventory Dashboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>CoreInventory</h2>
+
+<a href="/dashboard">Dashboard</a>
+<a href="/products_page">Add Product</a>
+<a href="/receipts_page">Receive Stock</a>
+<a href="/deliveries_page">Deliver Stock</a>
+<a href="/adjustments_page">Adjust Stock</a>
+<a href="/transfer_page">Internal Transfer</a>
+<a href="/ledger">Stock History</a>
+<a href="/logout">Logout</a>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>Inventory Dashboard</h1>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Products</h3>
+<p>{{ total_products }}</p>
+</div>
+
+<div class="card warning">
+<h3>Low Stock</h3>
+<p>{{ low_stock }}</p>
+</div>
+
+<div class="card danger">
+<h3>Out of Stock</h3>
+<p>{{ out_of_stock }}</p>
+</div>
+
+</div>
+
+
+<h2>Stock Summary</h2>
+
+<table>
+
+<tr>
+<th>Product</th>
+<th>Category</th>
+<th>Stock</th>
+<th>Warehouse</th>
+</tr>
+
+{% for product in products %}
+
+<tr>
+
+<td>{{ product[0] }}</td>
+<td>{{ product[1] }}</td>
+
+<td class="{% if product[2] < 10 %}low{% endif %}">
+{{ product[2] }}
+</td>
+
+<td>{{ product[3] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<div class="charts">
+
+<div class="chart-box">
+
+<h3>Stock by Category</h3>
+<canvas id="stockChart"></canvas>
+
+</div>
+
+<div class="chart-box">
+
+<h3>Stock by Warehouse</h3>
+<canvas id="warehouseChart"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const categories = {{ categories | tojson }};
+const stocks = {{ stocks | tojson }};
+const warehouses = {{ warehouses | tojson }};
+const warehouse_stock = {{ warehouse_stock | tojson }};
+
+const lowStock = {{ low_stock }};
+const outStock = {{ out_of_stock }};
+const totalProducts = {{ total_products }};
+const normalStock = totalProducts - lowStock - outStock;
+
+
+new Chart(document.getElementById('stockChart'), {
+
+type: 'bar',
+
+data: {
+labels: categories,
+datasets: [{
+label: 'Stock Quantity',
+data: stocks,
+backgroundColor:'#4F46E5'
+}]
+},
+
+options:{
+responsive:true
+}
+
+});
+
+
+new Chart(document.getElementById('warehouseChart'), {
+
+type: 'pie',
+
+data:{
+labels: warehouses,
+datasets:[{
+data: warehouse_stock,
+backgroundColor:['#10B981','#F59E0B','#4F46E5','#EF4444']
+}]
+},
+
+options:{
+responsive:true
+}
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Add Product</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+<h2>Add Product</h2>
+
+<form action="/products" method="POST">
+
+<label>Product Name</label>
+<input type="text" name="name" required>
+
+<label>SKU</label>
+<input type="text" name="sku">
+
+<label>Category</label>
+<input type="text" name="category">
+
+<label>Unit</label>
+<input type="text" name="unit">
+
+<label>Initial Stock</label>
+<input type="number" name="stock_quantity">
+
+<label>Warehouse Location</label>
+<input type="text" name="location">
+
+<label>Reorder Level</label>
+<input type="number" name="reorder_level">
+
+<button type="submit">Create Product</button>
+
+</form>
+
+<a href="/dashboard" class="back-btn">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

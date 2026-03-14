@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Internal Transfer</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>CoreInventory</h2>
+
+<a href="/dashboard">Dashboard</a>
+<a href="/products_list">Products</a>
+<a href="/products_page">Add Product</a>
+<a href="/receipts_page">Receive Stock</a>
+<a href="/deliveries_page">Deliver Stock</a>
+<a href="/adjustments_page">Adjust Stock</a>
+<a href="/transfer_page">Internal Transfer</a>
+<a href="/ledger">Stock History</a>
+<a href="/logout">Logout</a>
+
+</div>
+
+
+<div class="main">
+
+<h2>Internal Stock Transfer</h2>
+
+<div class="form-card">
+
+<form action="/transfer" method="POST">
+
+<label>Product ID</label>
+<input type="number" name="product_id" required>
+
+<label>From Location</label>
+<input type="text" name="from_location">
+
+<label>To Location</label>
+<input type="text" name="to_location">
+
+<label>Quantity</label>
+<input type="number" name="quantity">
+
+<button type="submit">Transfer Stock</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Stock History</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>CoreInventory</h2>
+
+<a href="/dashboard">Dashboard</a>
+<a href="/products_list">Products</a>
+<a href="/products_page">Add Product</a>
+<a href="/receipts_page">Receive Stock</a>
+<a href="/deliveries_page">Deliver Stock</a>
+<a href="/adjustments_page">Adjust Stock</a>
+<a href="/transfer_page">Internal Transfer</a>
+<a href="/ledger">Stock History</a>
+<a href="/logout">Logout</a>
+
+</div>
+
+
+<div class="main">
+
+<h2>Stock Movement History</h2>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Product ID</th>
+<th>Movement Type</th>
+<th>Quantity</th>
+<th>Source</th>
+<th>Destination</th>
+<th>Date</th>
+</tr>
+
+{% for m in movements %}
+
+<tr>
+
+<td>{{ m.id }}</td>
+<td>{{ m.product_id }}</td>
+<td>{{ m.movement_type }}</td>
+<td>{{ m.quantity }}</td>
+<td>{{ m.source }}</td>
+<td>{{ m.destination }}</td>
+<td>{{ m.timestamp }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
